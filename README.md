@@ -1,40 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 📤 OpenAPI to PostmanV2
 
-## Getting Started
+A simple and efficient tool to convert your OpenAPI (Swagger) specifications to [Postman Collection v2.1](https://schema.postman.com/collection/v2.1.0/collection.json) format — directly in the browser.
 
-First, run the development server:
+## 📚 Table of Contents
+
+- [📤 OpenAPI to PostmanV2](#-openapi-to-postmanv2)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [✨ Features](#-features)
+  - [🚀 Getting Started](#-getting-started)
+    - [🔧 1. Clone the repository](#-1-clone-the-repository)
+    - [📦 2. Install dependencies](#-2-install-dependencies)
+    - [⚙️ 3. Install Tauri CLI (optional)](#️-3-install-tauri-cli-optional)
+    - [💻 4. Start the development server](#-4-start-the-development-server)
+  - [🧰 Tech Stack](#-tech-stack)
+  - [🗂 File Upload \& Conversion](#-file-upload--conversion)
+  - [📦 Build for Production](#-build-for-production)
+  - [🛠️ Build Desktop App with Tauri](#️-build-desktop-app-with-tauri)
+  - [📄 License](#-license)
+  - [🙌 Acknowledgements](#-acknowledgements)
+
+## ✨ Features
+
+- 🧩 Supports both **YAML** and **JSON** OpenAPI formats
+- 🖥️ Client-side only — no backend needed
+- 📤 Upload `.yaml`, `.yml`, or `.json` files
+- 📥 Download converted Postman Collection v2.1 JSON
+- 🚫 No external API calls — safe and private
+
+## 🚀 Getting Started
+
+### 🔧 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:hieudoanm/markup.git
+cd openapi-to-postmanv2
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📦 2. Install dependencies
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### ⚙️ 3. Install Tauri CLI (optional)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+cargo install tauri-cli
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You also need to have Rust installed.
 
-## Learn More
+### 💻 4. Start the development server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧰 Tech Stack
 
-## Deploy on Vercel
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [`openapi-to-postmanv2`](https://github.com/postmanlabs/openapi-to-postman) (via browser-compatible wrapper)
+- [Tauri](https://v2.tauri.app/) — lightweight desktop app framework for Rust + frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🗂 File Upload & Conversion
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- Files are parsed in-browser using [`js-yaml`](https://github.com/nodeca/js-yaml) and validated against the OpenAPI schema.
+- The conversion process uses a bundled version of `openapi-to-postmanv2`, adapted to run in the browser.
+- Output is downloadable as a `.postman_collection.json` file.
+
+## 📦 Build for Production
+
+```bash
+pnpm run build
+```
+
+Then run:
+
+```bash
+pnpm run start
+```
+
+## 🛠️ Build Desktop App with Tauri
+
+After installing Tauri CLI and Rust:
+
+```bash
+pnpm tauri build
+```
+
+This will generate native executables for Windows, macOS, or Linux, depending on your OS.
+
+You can also run the desktop app in development mode:
+
+```bash
+pnpm tauri dev
+```
+
+## 📄 License
+
+This project is licensed under the **GNU General Public License v3.0**.
+You may copy, distribute, and modify the software as long as you track changes/dates in source files.
+Any derivative work must also be licensed under GPL-3.0.
+
+See the full license text in the [LICENSE](./LICENSE) file or visit:
+
+[https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
+
+## 🙌 Acknowledgements
+
+- [Postman Labs](https://github.com/postmanlabs) for the `openapi-to-postmanv2` core logic
+- [js-yaml](https://github.com/nodeca/js-yaml)
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tauri](https://v2.tauri.app/)

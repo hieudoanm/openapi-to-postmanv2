@@ -1,1 +1,1 @@
-export const APP_NAME = 'OpenAI to PostmanV2';
+export const APP_NAME = 'OpenAPI to PostmanV2';

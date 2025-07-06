@@ -66,18 +66,30 @@ const ConverterPage: NextPage = () => {
 		}
 	};
 
+	const handleDownload = () => {
+		if (!output || output.startsWith('Error:')) return;
+
+		const blob = new Blob([output], { type: 'application/json' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'postman_collection.json';
+		a.click();
+		URL.revokeObjectURL(url);
+	};
+
 	return (
 		<div className="flex h-screen flex-col">
 			<Navbar />
 			<div className="w-full border-t border-neutral-800" />
-			<div className="flex h-full grow flex-col gap-y-4 pb-4 md:gap-y-8 md:pb-8">
-				<div className="grid grow grid-cols-2">
+			<div className="flex h-full grow flex-col">
+				<div className="grid grow grid-cols-2 divide-x divide-neutral-800">
 					<div className="col-span-1 h-full">
 						<textarea
-							value={input}
 							onChange={(event) => setState((previous) => ({ ...previous, input: event.target.value }))}
+							value={input}
 							placeholder="Paste OpenAPI (JSON or YAML)"
-							className="h-96 h-full w-full p-4 font-mono text-sm"
+							className="h-96 h-full w-full p-4 font-mono text-sm focus:outline-none"
 						/>
 					</div>
 					<div className="col-span-1 h-full">
@@ -85,17 +97,28 @@ const ConverterPage: NextPage = () => {
 							readOnly
 							value={output}
 							placeholder="Postman Collection v2"
-							className="h-96 h-full w-full p-4 font-mono text-sm"
+							className="h-96 h-full w-full p-4 font-mono text-sm focus:outline-none"
 						/>
 					</div>
 				</div>
-				<div className="px-4 md:px-8">
-					<button
-						onClick={handleConvert}
-						disabled={loading}
-						className="w-full rounded-full border border-neutral-800 px-8 py-4">
-						{loading ? 'Converting...' : 'Convert'}
-					</button>
+				<div className="w-full border-t border-neutral-800" />
+				<div className="grid grid-cols-2 gap-2 p-2 md:gap-4 md:p-4">
+					<div className="col-span-1">
+						<button
+							onClick={handleConvert}
+							disabled={loading}
+							className="w-full cursor-pointer rounded-full border border-neutral-800 px-4 py-2">
+							{loading ? 'Converting...' : 'Convert'}
+						</button>
+					</div>
+					<div className="col-span-1">
+						<button
+							onClick={handleDownload}
+							disabled={!output || output.startsWith('Error:')}
+							className="w-full cursor-pointer rounded-full border border-neutral-800 px-4 py-2">
+							Download
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
