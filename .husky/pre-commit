@@ -1,4 +1,4 @@
 pnpm run lint
-pnpm run build
+pnpm run docs
 pnpm run format
 git add -A
