@@ -32,7 +32,7 @@ A simple and efficient tool to convert your OpenAPI (Swagger) specifications to 
 ### 🔧 1. Clone the repository
 
 ```bash
-git clone git@github.com:hieudoanm/markup.git
+git clone git@github.com:hieudoanm/openapi-to-postmanv2.git
 cd openapi-to-postmanv2
 ```
 
